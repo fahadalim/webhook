@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
     body:{ type: String, required:false},
     status:{ type: Number , required:true},
     type:{type:String,required: true},
+    userStatus:{type:String,required: true},
     image_id:{type:String,required:false}
   },{timestamps: { createdAt: true, updatedAt: false }});
   
