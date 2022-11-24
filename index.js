@@ -86,6 +86,7 @@ let userStatus = "";
       let type = body_param.entry[0].changes[0].value.messages[0].type;
 
       const checkNewUser = User.findOne({from:from})
+      console.log("fahad:",checkNewUser)
       if(checkNewUser === null){
         userStatus = "new"
       }else if(checkNewUser !== null){
