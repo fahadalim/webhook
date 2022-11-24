@@ -105,9 +105,9 @@ let userStatus = "";
         }
       
 
-      console.log("phone number " + phon_no_id);
-      console.log("from " + from);
-      console.log("boady param " + msg_body);
+    //   console.log("phone number " + phon_no_id);
+    //   console.log("from " + from);
+    //   console.log("boady param " + msg_body);
 
       //    axios({
       //        method:"POST",
