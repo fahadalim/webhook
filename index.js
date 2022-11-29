@@ -12,7 +12,7 @@ const token = process.env.TOKEN;
 const mytoken = process.env.MYTOKEN;
 app.use(cors());
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 9001, () => {
   console.log("webhook is listening");
   connect();
 });
