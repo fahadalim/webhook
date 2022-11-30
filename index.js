@@ -63,10 +63,9 @@ app.post("/fahad", async (req, res) => {
 //   }
 // });
 
-
 app.post("/webhook", async (req, res) => {
   //i want some
-let userStatus = "";
+  let userStatus = "";
   let body_param = req.body;
 
   console.log(JSON.stringify(body_param, null, 2));
@@ -79,61 +78,74 @@ let userStatus = "";
       body_param.entry[0].changes[0].value.messages &&
       body_param.entry[0].changes[0].value.messages[0]
     ) {
-        if(body_param.entry[0].changes[0].value.messages[0].type == "text"){
-            let phon_no_id =
-                body_param.entry[0].changes[0].value.metadata.phone_number_id;
-            let from = body_param.entry[0].changes[0].value.messages[0].from;
-            let msg_body = body_param.entry[0].changes[0].value.messages[0].text.body;
-            let type = body_param.entry[0].changes[0].value.messages[0].type;
+      if (body_param.entry[0].changes[0].value.messages[0].type == "text") {
+        let phon_no_id =
+          body_param.entry[0].changes[0].value.metadata.phone_number_id;
+        let from = body_param.entry[0].changes[0].value.messages[0].from;
+        let msg_body =
+          body_param.entry[0].changes[0].value.messages[0].text.body;
+        let type = body_param.entry[0].changes[0].value.messages[0].type;
 
-            const checkNewUser = await User.findOne({from:from})
-            console.log("fahad:",checkNewUser)
-            if(checkNewUser === null){
-                userStatus = "new"
-            }else if(checkNewUser !== null){
-                userStatus = "old"
-            }
-            let user = User.create({
-                from: from,
-                to: phon_no_id,
-                status: 0,
-                type: type,
-                body: msg_body,
-                userStatus : userStatus
-            });
-            res.status(200).send({ data: user, message: "success" });
+        const checkNewUser = await User.findOne({ from: from });
+        console.log("fahad:", checkNewUser);
+        if (checkNewUser === null) {
+          userStatus = "new";
+        } else if (checkNewUser !== null) {
+          userStatus = "old";
         }
-        
-        else if(body_param.entry[0].changes[0].value.messages[0].type == "interactive"){
-          console.log(body_param.entry[0].changes[0].value.messages[0].type)
-          if(body_param.entry[0].changes[0].value.messages[0].interactive.button_reply.title =="vegetable"){
-            let user = User.create({
-              from: from,
-              to: phon_no_id,
-              status: 0,
-              type: type,
-              userStatus:"old",
-              list:"vagetable"
+        let user = User.create({
+          from: from,
+          to: phon_no_id,
+          status: 0,
+          type: type,
+          body: msg_body,
+          userStatus: userStatus,
+        });
+        res.status(200).send({ data: user, message: "success" });
+      } else if (
+        body_param.entry[0].changes[0].value.messages[0].type == "interactive"
+      ) {
+        console.log(body_param.entry[0].changes[0].value.messages[0].type);
+        if (
+          body_param.entry[0].changes[0].value.messages[0].interactive
+            .button_reply.title == "vegetable"
+        ) {
+          let phon_no_id =
+            body_param.entry[0].changes[0].value.metadata.phone_number_id;
+          let from = body_param.entry[0].changes[0].value.messages[0].from;
+          let type = body_param.entry[0].changes[0].value.messages[0].type;
+          let user = User.create({
+            from: from,
+            to: phon_no_id,
+            status: 0,
+            type: type,
+            userStatus: "old",
+            list: "vagetable",
           });
           res.status(200).send({ data: user, message: "success" });
-          }
-          else if(body_param.entry[0].changes[0].value.messages[0].interactive.button_reply.title =="groceries"){
-            let user = User.create({
-              from: from,
-              to: phon_no_id,
-              status: 0,
-              type: type,
-              userStatus:"old",
-              list:"groceries"
+        } else if (
+          body_param.entry[0].changes[0].value.messages[0].interactive
+            .button_reply.title == "groceries"
+        ) {
+          let phon_no_id =
+            body_param.entry[0].changes[0].value.metadata.phone_number_id;
+          let from = body_param.entry[0].changes[0].value.messages[0].from;
+          let type = body_param.entry[0].changes[0].value.messages[0].type;
+          let user = User.create({
+            from: from,
+            to: phon_no_id,
+            status: 0,
+            type: type,
+            userStatus: "old",
+            list: "groceries",
           });
           res.status(200).send({ data: user, message: "success" });
-          }
         }
-      
+      }
 
-    //   console.log("phone number " + phon_no_id);
-    //   console.log("from " + from);
-    //   console.log("boady param " + msg_body);
+      //   console.log("phone number " + phon_no_id);
+      //   console.log("from " + from);
+      //   console.log("boady param " + msg_body);
 
       //    axios({
       //        method:"POST",
