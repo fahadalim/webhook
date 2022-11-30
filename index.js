@@ -104,7 +104,7 @@ let userStatus = "";
             res.status(200).send({ data: user, message: "success" });
         }
         else if(body_param.entry[0].changes[0].value.messages[0].type == "interactive"){
-          if(body_param.entry[0].changes[0].value.messages[0].type.interactive.button.title =="vegetable"){
+          if(body_param.entry[0].changes[0].value.messages[0].type.interactive.button_reply.title =="vegetable"){
             let user = User.create({
               from: from,
               to: phon_no_id,
@@ -115,7 +115,7 @@ let userStatus = "";
           });
           res.status(200).send({ data: user, message: "success" });
           }
-          else if(body_param.entry[0].changes[0].value.messages[0].type.interactive.button.title =="groceries"){
+          else if(body_param.entry[0].changes[0].value.messages[0].type.interactive.button_reply.title =="groceries"){
             let user = User.create({
               from: from,
               to: phon_no_id,
