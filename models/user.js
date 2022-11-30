@@ -7,7 +7,8 @@ const userSchema = new mongoose.Schema({
     status:{ type: Number , required:true},
     type:{type:String,required: true},
     userStatus:{type:String,required: true},
-    image_id:{type:String,required:false}
+    image_id:{type:String,required:false},
+    list:{type:String,required:false}
   },{timestamps: { createdAt: true, updatedAt: false }});
   
   const User = mongoose.model("user", userSchema);

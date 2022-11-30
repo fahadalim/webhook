@@ -103,6 +103,30 @@ let userStatus = "";
             });
             res.status(200).send({ data: user, message: "success" });
         }
+        else if(body_param.entry[0].changes[0].value.messages[0].type == "interactive"){
+          if(body_param.entry[0].changes[0].value.messages[0].type.interactive.button.title =="vegetable"){
+            let user = User.create({
+              from: from,
+              to: phon_no_id,
+              status: 0,
+              type: type,
+              userStatus:"old",
+              list:"vagetable"
+          });
+          res.status(200).send({ data: user, message: "success" });
+          }
+          else if(body_param.entry[0].changes[0].value.messages[0].type.interactive.button.title =="groceries"){
+            let user = User.create({
+              from: from,
+              to: phon_no_id,
+              status: 0,
+              type: type,
+              userStatus:"old",
+              list:"groceries"
+          });
+          res.status(200).send({ data: user, message: "success" });
+          }
+        }
       
 
     //   console.log("phone number " + phon_no_id);
