@@ -5,7 +5,7 @@ require("dotenv").config();
 const User = require("./models/user");
 const connect = require("./db");
 const cors = require("cors");
-const pgDb = require("./postgresQueries");
+
 
 const app = express().use(body_parser.json());
 
@@ -175,6 +175,5 @@ app.get("/", (req, res) => {
   res.status(200).send("hello this is webhook setup");
 });
 
-app.post("/addWorkflow", pgDb.addWorkflow);
-app.get("allWorkflows", pgDb.getAllWorkflows);
+
 
