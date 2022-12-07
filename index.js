@@ -178,19 +178,15 @@ app.post("/webhook", async (req, res) => {
 
       for (let i = 0; i < nodesOrder.length; i++) {
         if (nodesOrder[i].type === "apiNode") {
-          methods.onApi = async function () {
-            currentState = "apiNode"
-            console.log("api node started")
-          }
+          currentState = "apiNode"
+          console.log("api node started")
         } else if (nodesOrder[i].type === "conditionNode") {
           currentState = "conditionNode"
-          methods.onCondition = function () {
-            console.log("condition node started")
-          }
+          console.log("condition node started")
+
         } else if (nodesOrder[i].type === "textNode") {
           if (currentState === "apiNode") {
             console.log("api failed")
-
           }
           else if (currentState === "conditionNode") {
             console.log("new user")
