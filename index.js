@@ -167,36 +167,6 @@ app.post("/webhook", async (req, res) => {
 
       //    res.sendStatus(200);
 
-      let nodesOrder = [
-        { id: '43403962-75b6-498f-8c8d-b8f755733c5f', type: 'startNode', data: {} },
-        { id: 'd543879e-bd7d-442d-9b48-ee796fcccae2', type: 'apiNode', data: {} },
-        { id: '34901df7-9c8c-4bd8-941f-987793d49088', type: 'conditionNode', data: {} },
-        { id: '3c8829bf-fa78-48b0-896d-6dde6fa7290d', type: 'textNode', data: "Sorry we're facing problem" },
-        { id: '98eb9e4e-b579-45d5-9b9b-5430cc282a75', type: 'textNode', data: 'Welcome to our platform' },
-        { id: 'd1ae83cb-a05a-43d3-9f63-f90ea49385cd', type: 'textNode', data: 'Existing user' },
-        { id: 'bda0d8e4-3b35-48b3-adbc-70c9b65d7405', type: "templateNode" }]
-
-      for (let i = 0; i < nodesOrder.length; i++) {
-        if (nodesOrder[i].type === "apiNode") {
-          currentState = "apiNode"
-          console.log("api node started")
-        } else if (nodesOrder[i].type === "conditionNode") {
-          currentState = "conditionNode"
-          console.log("condition node started")
-
-        } else if (nodesOrder[i].type === "textNode") {
-          if (currentState === "apiNode") {
-            console.log("api failed")
-          }
-          else if (currentState === "conditionNode") {
-            console.log("new user")
-          }
-          currentState = "textNode"
-        } else if (nodesOrder[i].type === "templateNode") {
-          console.log("template sent")
-          currentState = "templateNode"
-        }
-      }
 
     } else {
       res.sendStatus(404);
