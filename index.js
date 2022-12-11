@@ -73,6 +73,7 @@ app.post("/webhook", async (req, res) => {
   console.log(JSON.stringify(body_param, null, 2));
 
   if (body_param.object) {
+
     console.log("inside body param");
     if (
       body_param.entry &&
@@ -95,6 +96,73 @@ app.post("/webhook", async (req, res) => {
         } else if (checkNewUser !== null) {
           userStatus = "old";
         }
+
+        if (msg_body === "start") {
+          //send to ask if old or new
+          const token = 'EAAJW4aYvBDsBAEZAUrJD1JHtATFNWIPLv1TmvsVZBqr7u8LhfWp3DQqFNQRLTS3L5RjbPNmavyhSHNLrIUE9RVVP6k4KTpv1GaHX6jQT3T6VuzeyE71LZCI2Lub9kttjQVV1zVC7uSbPOjsXI56TRZCZBQxKfuew494hZCEgeFCx82p6NRwDSgKNSCxfDKKHS8xmxiDWVocuZBFQCm1gAAR'
+          axios({
+            method: "POST",
+            url:
+              "https://graph.facebook.com/v15.0/" +
+              113964918201249 +
+              "/messages?access_token=" +
+              token,
+            data: {
+              messaging_product: "whatsapp",
+              to: from,
+              text: {
+                body: 'are you new/old',
+              },
+            },
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+        }
+        else if (msg_body === "new") {
+          const token = 'EAAJW4aYvBDsBAEZAUrJD1JHtATFNWIPLv1TmvsVZBqr7u8LhfWp3DQqFNQRLTS3L5RjbPNmavyhSHNLrIUE9RVVP6k4KTpv1GaHX6jQT3T6VuzeyE71LZCI2Lub9kttjQVV1zVC7uSbPOjsXI56TRZCZBQxKfuew494hZCEgeFCx82p6NRwDSgKNSCxfDKKHS8xmxiDWVocuZBFQCm1gAAR'
+          axios({
+            method: "POST",
+            url:
+              "https://graph.facebook.com/v15.0/" +
+              113964918201249 +
+              "/messages?access_token=" +
+              token,
+            data: {
+              messaging_product: "whatsapp",
+              to: from,
+              text: {
+                body: 'pls provide phone no.',
+              },
+            },
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+        }
+        else if (msg_body === "old" || msg_body.length === 10) {
+          const token = 'EAAJW4aYvBDsBAEZAUrJD1JHtATFNWIPLv1TmvsVZBqr7u8LhfWp3DQqFNQRLTS3L5RjbPNmavyhSHNLrIUE9RVVP6k4KTpv1GaHX6jQT3T6VuzeyE71LZCI2Lub9kttjQVV1zVC7uSbPOjsXI56TRZCZBQxKfuew494hZCEgeFCx82p6NRwDSgKNSCxfDKKHS8xmxiDWVocuZBFQCm1gAAR'
+          axios({
+            method: "POST",
+            url:
+              "https://graph.facebook.com/v15.0/" +
+              113964918201249 +
+              "/messages?access_token=" +
+              token,
+            data: {
+              messaging_product: "whatsapp",
+              to: from,
+              text: {
+                body: 'Vegetables \n 1. Potato \n 2. Tomato \n 3. Onion',
+              },
+            },
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+        }
+
+
         let user = User.create({
           from: from,
           to: phon_no_id,
@@ -103,6 +171,9 @@ app.post("/webhook", async (req, res) => {
           body: msg_body,
           userStatus: userStatus,
         });
+
+
+
         res.status(200).send({ data: user, message: "success" });
       } else if (
         body_param.entry[0].changes[0].value.messages[0].type == "interactive"
@@ -141,6 +212,9 @@ app.post("/webhook", async (req, res) => {
             userStatus: "old",
             list: "groceries",
           });
+
+
+
           res.status(200).send({ data: user, message: "success" });
         }
       }
