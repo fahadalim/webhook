@@ -89,6 +89,9 @@ app.post("/webhook", async (req, res) => {
           body_param.entry[0].changes[0].value.messages[0].text.body;
         let type = body_param.entry[0].changes[0].value.messages[0].type;
 
+        console.log('msgbody', msg_body)
+
+
         const checkNewUser = await User.findOne({ from: from });
         console.log("fahad:", checkNewUser);
         if (checkNewUser === null) {
@@ -99,24 +102,21 @@ app.post("/webhook", async (req, res) => {
 
         if (msg_body === "start") {
           //send to ask if old or new
-          const token = 'EAAJW4aYvBDsBAEZAUrJD1JHtATFNWIPLv1TmvsVZBqr7u8LhfWp3DQqFNQRLTS3L5RjbPNmavyhSHNLrIUE9RVVP6k4KTpv1GaHX6jQT3T6VuzeyE71LZCI2Lub9kttjQVV1zVC7uSbPOjsXI56TRZCZBQxKfuew494hZCEgeFCx82p6NRwDSgKNSCxfDKKHS8xmxiDWVocuZBFQCm1gAAR'
+          const token = 'EAAJW4aYvBDsBALT9d7TQo0l3OhmVScmzIRiWhVr23BZBWwGIcY6K302cze03Cqv9zhhVxezb53TU3x6n2ZCZBJ5KUEfp7a2ZChaiiCuHqFmpgQZADVUXtZBrSuXKw6Bdox1xOOriFIlgfmZBPSMbtMEkfW4ZC8ogbhWjmo346oUNqVMSXqmNDBQagmmpKrhbpIMl2DdTwLdNxmjVvnwaMSUm'
           axios({
             method: "POST",
-            url:
-              "https://graph.facebook.com/v15.0/" +
-              113964918201249 +
-              "/messages?access_token=" +
-              token,
+            url: "https://graph.facebook.com/v15.0/" + "113964918201249" + "/messages?access_token=" + token,
             data: {
               messaging_product: "whatsapp",
               to: from,
               text: {
-                body: 'are you new/old',
-              },
+                body: "are you new/old"
+              }
             },
             headers: {
-              "Content-Type": "application/json",
-            },
+              "Content-Type": "application/json"
+            }
+
           });
         }
         else if (msg_body === "new") {
