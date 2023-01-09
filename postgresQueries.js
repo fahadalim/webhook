@@ -8,11 +8,11 @@ const pool = new Pool({
 })
 ​
 ​
-const StateMachine = require("javascript-state-machine")
+// const StateMachine = require("javascript-state-machine")
 // const key = "e5b78779c53ded533dbd9023f6c74286"
-const token = "Bearer EAAJW4aYvBDsBAEX4kBeekthXN9OtOv92knxF7EPNBvjFp9bPm7ZBOZAQCTs0BqROOjrHqL1rZAllHQ083XF9xIeLAIDLaJZAv0ra3K7uo5y8X044nvATQacBZCxjltD8fxozyhyT470wzmKlZAMIKKkc5U5kzmccKNJMNvwYVcSbeFTYltvXjWN7gmhPZBPqLbf4q6wGuyiZBGbJS9mYrWJE"
-const axios = require("axios")
-let currentState = ""
+// const token = "Bearer EAAJW4aYvBDsBAEX4kBeekthXN9OtOv92knxF7EPNBvjFp9bPm7ZBOZAQCTs0BqROOjrHqL1rZAllHQ083XF9xIeLAIDLaJZAv0ra3K7uo5y8X044nvATQacBZCxjltD8fxozyhyT470wzmKlZAMIKKkc5U5kzmccKNJMNvwYVcSbeFTYltvXjWN7gmhPZBPqLbf4q6wGuyiZBGbJS9mYrWJE"
+// const axios = require("axios")
+// let currentState = ""
 // const token = ""
 ​
 let methods = {
