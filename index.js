@@ -101,6 +101,10 @@ app.post("/webhook", async (req, res) => {
   }
 });
 
+app.post("/createtable", pgDb.createTable)
+app.post("/insertdata", pgDb.insertData)
+app.get("getdata", pgDb.getTableData)
+
 app.get("/", (req, res) => {
   res.status(200).send("hello this is webhook setup");
 });
