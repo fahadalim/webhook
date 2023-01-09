@@ -5,6 +5,7 @@ require("dotenv").config();
 const User = require("./models/user");
 const connect = require("./db");
 const cors = require("cors");
+const pgDb = require("./postgresQueries")
 
 
 const app = express().use(body_parser.json());
