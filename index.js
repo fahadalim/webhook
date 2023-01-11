@@ -57,7 +57,6 @@ app.post("/fahad", async (req, res) => {
 
 app.post("/webhook", async (req, res) => {
   //i want some
-  let userStatus = "";
   let body_param = req.body;
 
   console.log(JSON.stringify(body_param, null, 2));
@@ -79,23 +78,23 @@ app.post("/webhook", async (req, res) => {
       console.log("boady param " + msg_body);
       getuserInput(from,msg_body)
       
-      //    axios({
-      //        method:"POST",
-      //        url:"https://graph.facebook.com/v13.0/"+phon_no_id+"/messages?access_token="+token,
-      //        data:{
-      //            messaging_product:"whatsapp",
-      //            to:from,
-      //            text:{
-      //                body:"Hi.. I'm Prasath, your message is "+msg_body
-      //            }
-      //        },
-      //        headers:{
-      //            "Content-Type":"application/json"
-      //        }
+         axios({
+             method:"POST",
+             url:"https://graph.facebook.com/v13.0/"+phon_no_id+"/messages?access_token="+token,
+             data:{
+                 messaging_product:"whatsapp",
+                 to:from,
+                 text:{
+                     body:"Hi.. I'm Prasath, your message is "+msg_body
+                 }
+             },
+             headers:{
+                 "Content-Type":"application/json"
+             }
 
-      //    });
+         });
 
-      //    res.sendStatus(200);
+         res.sendStatus(200);
 
 
     } else {
