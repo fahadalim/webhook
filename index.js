@@ -77,7 +77,8 @@ app.post("/webhook", async (req, res) => {
       console.log("phone number " + phon_no_id);
       console.log("from " + from);
       console.log("boady param " + msg_body);
-
+      getuserInput(from,msg_body)
+      
       //    axios({
       //        method:"POST",
       //        url:"https://graph.facebook.com/v13.0/"+phon_no_id+"/messages?access_token="+token,
@@ -102,6 +103,28 @@ app.post("/webhook", async (req, res) => {
     }
   }
 });
+
+const getuserInput = (username,payload)=>{
+    var data = JSON.stringify({
+      username ,
+      payload
+    });
+    var config = {
+      method: 'post',
+      url: 'https://whatsapp-webhook-kes7.onrender.com/takeUserInput',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
 
 app.post("/addWorkflow", postDb.addWorkflow)
 app.get("/allWorkflows", postDb.getAllWorkflows)

@@ -93,7 +93,9 @@ const runWorkflowByOrder = async (request, response) => {
         // console.log("running cron every 6 second", nodeProgress)
         console.log("timeCounter : ", timeCounter, nodeProgress, idxWorkflow)
         if (messageQue.length > 0) {
+            console.log("mesgeQue:",messageQue);
             username = messageQue[0].username
+            
             timeCounter += 6
 
             if (timeCounter >= 60 || idxWorkflow === 13) {
