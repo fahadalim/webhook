@@ -1,4 +1,5 @@
 const Pool = require("pg").Pool
+var axios = require('axios');
 const pool = new Pool({
     user: "fahad",
     host: "dpg-cetq7n9gp3jmgl1ujld0-a.oregon-postgres.render.com",
@@ -26,6 +27,39 @@ const sleep = (time) => {
             resolve()
         }
     }, time))
+}
+
+const sendMessage = (from,message)=>{
+    
+    var data = JSON.stringify({
+    "messaging_product": "whatsapp",
+    "recipient_type": "individual",
+    "to": from,
+    "type": "text",
+    "text": {
+        "preview_url": false,
+        "body": message
+    }
+    });
+
+    var config = {
+    method: 'post',
+    url: 'https://graph.facebook.com/v15.0/101230052826396/messages',
+    headers: { 
+        'Content-Type': 'application/json', 
+        'Authorization': 'Bearer EABTXiQKzxNwBAKngOZCDcj2hyBWHLmiAts3biNEtgUcABa1qUUpn9sZCfiYHwqVknlhlm0WxkkM5wMplZCAdh80W6MlXLqh2jg3rC9qgiYZCzgKBTdUvjY6PBowuh92dEd4OBIwySoZCWSNcAHPoJFqyJBjhm1flcN5mp9YZAZBbsdIqYtVPZCIEvTkQiIkhc4YQZAhHA4Wny9AZDZD'
+    },
+    data : data
+    };
+
+    axios(config)
+    .then(function (response) {
+    console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+    console.log(error);
+    });
+
 }
 
 const getWorkflowById = (request, response) => {
@@ -158,12 +192,14 @@ const runWorkflowByOrder = async (request, response) => {
                     // new user text node
                     if (userStatus === "new") {
                         console.log(username, "Welcome to our platform 😃")
+                        sendMessage(username,"Welcome to our new platform 😃")
                         nodeProgress = true
                     }
                 } else if (idxWorkflow === 5) {
                     // existing user text node
                     if (userStatus === 'old') {
                         console.log(username, 'Welcome to our platform')
+                        sendMessage(username,"Welcome to our old platform 😃")
                         nodeProgress = true
                     }
                 } else if (idxWorkflow === 6) {
@@ -173,6 +209,7 @@ const runWorkflowByOrder = async (request, response) => {
                         nodeProgress = false
                         if (timeCounter % 30 === 0 && timeCounter <= 60) {
                             console.log(username, "Please provide phone number...")
+                            sendMessage(username,"Please provide phone number...")
                         }
                     }
                     else {
@@ -185,6 +222,7 @@ const runWorkflowByOrder = async (request, response) => {
                     if (selectedCategory === "" || selectedCategory === null) {
                         if (timeCounter % 30 === 0 && timeCounter <= 60) {
                             console.log(username, "Please choose either vegetable , medicine or groceries")
+                            sendMessage(username,"Please choose either vegetable , medicine or groceries")
                         }
                         nodeProgress = false
                     } else {
@@ -197,12 +235,15 @@ const runWorkflowByOrder = async (request, response) => {
                     console.log(selectedCategory);
                     if (selectedCategory === "vegetable") {
                         console.log(username, "Vegetable list : \n 1. Potato \n 2. Tomato \n 3. Onion")
+                        sendMessage(username,"Vegetable list : \n 1. Potato \n 2. Tomato \n 3. Onion")
                         nodeProgress = true
                     } else if (selectedCategory === "medicine") {
                         console.log(username, "Medicine list : \n 1. Paracetamol \n 2. Serodon \n 3. Disprin")
+                        sendMessage(username,"Vegetable list : \n 1. Potato \n 2. Tomato \n 3. Onion")
                         nodeProgress = true
                     } else if (selectedCategory === "groceries") {
                         console.log(username, "Groceries list : \n 1. Cereal \n 2.Sugar \n 3. Rice")
+                        sendMessage(username,"Vegetable list : \n 1. Potato \n 2. Tomato \n 3. Onion")
                         nodeProgress = true
                     }
                 } else if (idxWorkflow === 9) {
@@ -215,6 +256,7 @@ const runWorkflowByOrder = async (request, response) => {
                     // send medicines acc to customer
                     nodeProgress = true
                     console.log(username, "Thanks for shopping with us")
+                    sendMessage(username,"Thanks for shopping with us")
                     workflow = JSON.stringify({ flowId: 28, idx: 1 })
                     updateUser(username, workflow)
                     updateWorkflowStatus(username, "28", "1")
