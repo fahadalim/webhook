@@ -90,9 +90,7 @@ const runWorkflowByOrder = async (request, response) => {
 
 
     task = cron.schedule("*/6 * * * * *", async () => {
-
         // console.log("running cron every 6 second", nodeProgress)
-
         console.log("timeCounter : ", timeCounter, nodeProgress, idxWorkflow)
         if (messageQue.length > 0) {
             username = messageQue[0].username
@@ -182,7 +180,6 @@ const runWorkflowByOrder = async (request, response) => {
                     // wait for customer
                 } else if (idxWorkflow === 7) {
                     // send category template
-
                     if (selectedCategory === "" || selectedCategory === null) {
                         if (timeCounter % 30 === 0 && timeCounter <= 60) {
                             console.log(username, "Please choose either vegetable , medicine or groceries")
@@ -427,6 +424,9 @@ const abortWorkflow = (request, response) => {
     terminateWorkflowById(id)
     if (task) {
         task.stop()
+    }
+    if (messageQue.length > 0) {
+        messageQue.pop()
     }
     response.json({ msg: "workflow stopped" })
 }
