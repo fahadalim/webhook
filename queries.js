@@ -214,8 +214,6 @@ const runWorkflowByOrder = async (request, response) => {
                     nodeProgress = true
                 } else if (idxWorkflow === 11) {
                     // send medicines acc to customer
-                } else if (idxWorkflow === 12) {
-                    // template failed
                     nodeProgress = true
                     console.log(username, "Thanks for shopping with us")
                     workflow = JSON.stringify({ flowId: 28, idx: 1 })
@@ -224,6 +222,9 @@ const runWorkflowByOrder = async (request, response) => {
                     updateCategory(username)
                     messageQue.pop()
                     break
+                } else if (idxWorkflow === 12) {
+                    // template failed
+                    nodeProgress = true
                 }
             }
         }
