@@ -239,11 +239,11 @@ const runWorkflowByOrder = async (request, response) => {
                         nodeProgress = true
                     } else if (selectedCategory === "medicine") {
                         console.log(username, "Medicine list : \n 1. Paracetamol \n 2. Serodon \n 3. Disprin")
-                        sendMessage(username,"Vegetable list : \n 1. Potato \n 2. Tomato \n 3. Onion")
+                        sendMessage(username,"Medicine list : \n 1. Paracetamol \n 2. Serodon \n 3. Disprin")
                         nodeProgress = true
                     } else if (selectedCategory === "groceries") {
                         console.log(username, "Groceries list : \n 1. Cereal \n 2.Sugar \n 3. Rice")
-                        sendMessage(username,"Vegetable list : \n 1. Potato \n 2. Tomato \n 3. Onion")
+                        sendMessage(username,"Groceries list : \n 1. Cereal \n 2.Sugar \n 3. Rice")
                         nodeProgress = true
                     }
                 } else if (idxWorkflow === 9) {
